@@ -1,4 +1,5 @@
+import colors from './colorPallete';
 import messages from './messages';
 
-export { messages };
+export { colors, messages };
 

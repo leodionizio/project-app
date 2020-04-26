@@ -1,10 +1,10 @@
 {
   "devToolsPort": 19002,
-  "expoServerPort": null,
-  "packagerPort": null,
-  "packagerPid": null,
-  "expoServerNgrokUrl": null,
-  "packagerNgrokUrl": null,
-  "ngrokPid": null,
+  "expoServerPort": 19000,
+  "packagerPort": 19001,
+  "packagerPid": 24054,
+  "expoServerNgrokUrl": "https://xc-si7.anonymous.project-app.exp.direct",
+  "packagerNgrokUrl": "https://packager.wp-h5r.anonymous.project-app.exp.direct",
+  "ngrokPid": 24217,
   "webpackServerPort": null
 }

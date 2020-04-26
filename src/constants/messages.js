@@ -2,7 +2,8 @@ const messages = {
     empty: {
         email: 'O e-mail é obrigatório.',
         password: 'A senha é obrigatória.',
-        username: 'O usuário é obrigatório'
+        name: 'O nome é obrigatório',
+        user: 'O usuário é obrigatório'
     },
     invalid: {
         email: 'O e-mail está inválido.'

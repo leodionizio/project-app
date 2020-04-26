@@ -1,15 +1,6 @@
 
-import { createSwitchNavigator, createAppContainer } from 'react-navigation';
-
-import LoginPage from './src/pages/LoginPage/index';
-
-const AppSwitchNavigator = createSwitchNavigator({
-  Login: {
-    screen: LoginPage
-  }
-}, {
-  initialRouteName: 'Login'
-});
+import { createAppContainer } from 'react-navigation';
+import AppSwitchNavigator from '@navigators/switchNavigation';
 
 const App = createAppContainer(AppSwitchNavigator);
 
