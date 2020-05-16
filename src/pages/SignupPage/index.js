@@ -1,15 +1,26 @@
 import React, { Component } from 'react';
-import { Text, View, Keyboard } from 'react-native';
+import {
+  Text,
+  SafeAreaView,
+  Keyboard,
+  KeyboardAvoidingView,
+  View,
+} from 'react-native';
 
-import { FormInput, CustomButton, CustomTextLink, CustomLottieView, Navbar } from '@components/index';
+import {
+  FormInput,
+  CustomButton,
+  CustomTextLink,
+  CustomLottieView,
+  Navbar,
+} from '@components/index';
 import validators from '@utils/validate';
 
 import { styles } from './styles';
 
-
 export default class SignupPage extends Component {
   constructor(props) {
-    super(props)
+    super(props);
 
     this.handleFocus = this.handleFocus.bind(this);
     this.handleInput = this.handleInput.bind(this);
@@ -19,20 +30,20 @@ export default class SignupPage extends Component {
       formControls: {
         name: '',
         email: '',
-        user: '',
-        password: ''
+        document: '',
+        password: '',
       },
       errors: {
-        invalidCredentials: false
+        invalidCredentials: false,
       },
       isFocused: {
         name: false,
         email: false,
-        user: false,
-        password: false
+        document: false,
+        password: false,
       },
       isLoading: false,
-      showAnimation: false
+      showAnimation: false,
     };
   }
 
@@ -45,14 +56,14 @@ export default class SignupPage extends Component {
       this.setState({ showAnimation: false });
       this.props.navigation.navigate('Login');
     }, 2000);
-  }
+  };
 
   handleFocus(name) {
     const { isFocused } = this.state;
     isFocused[name] = !isFocused[name];
 
     this.setState({ isFocused });
-  };
+  }
 
   handleInput(input) {
     const { name, value } = input;
@@ -64,12 +75,12 @@ export default class SignupPage extends Component {
 
     this.setState({
       formControls,
-      errors
+      errors,
     });
-  };
+  }
 
   handleError(status) {
-    const { errors } = this.state
+    const { errors } = this.state;
 
     switch (status) {
       case 401:
@@ -81,126 +92,142 @@ export default class SignupPage extends Component {
         toast.error(messages.error['generic'], toastOptions);
         break;
     }
-  };
+  }
 
-  hasErrors = errors => Object.values(errors).some(error => error);
+  hasErrors = (errors) => Object.values(errors).some((error) => error);
 
-  async handleRegistry(e) {
-    // e.preventDefault();
-
-    const { formControls, errors } = this.state;
+  async handleRegistry() {
     Keyboard.dismiss();
+    const { formControls, errors } = this.state;
+    const formErrors = validators.formValidate(formControls, errors);
+
+    if (this.hasErrors(formErrors)) {
+      this.hideLoader();
+      this.setState({ errors: formErrors });
+      return;
+    }
 
     this.showLoader();
 
-    const formErrors = validators.formValidate(
-      formControls,
-      errors
-    );
-
-    if (!this.hasErrors(formErrors)) {
-      try {
-        console.log(formControls);
-        console.log(this.state);
-
-        // await api.post('/auth/login', formControls);
-        // this.props.history.push('/');
-
-      } catch (error) {
-        this.handleError(error);
-      }
-
-      // concluding - remove after
+    try {
+      console.log('form: ', formControls);
+      // await api.post('/auth/login', formControls);
       setTimeout(() => {
         this.hideLoader();
-        this.showAnimationView();
+        /* Ajustar para mobile */
+        // this.showAnimationView();
+        this.props.navigation.navigate('Login');
       }, 3000);
 
-      // - end remove
-      return;
+    } catch (error) {
+      this.handleError(error);
     }
-    this.hideLoader();
-    this.setState({ errors: formErrors });
-  };
+  }
 
   render() {
-    const { formControls, errors, isFocused, isLoading, showAnimation } = this.state;
+    const {
+      formControls,
+      errors,
+      isFocused,
+      isLoading,
+      showAnimation,
+    } = this.state;
     const { navigate } = this.props.navigation;
 
     return (
-      <View style={styles.container}>
+      <SafeAreaView style={styles.container}>
+        <KeyboardAvoidingView behavior="height" style={styles.content}>
+          <View style={styles.contentForm}>
+            <Text style={styles.title}>
+              Para se cadastrar, por favor preencha as informações abaixo:
+            </Text>
 
-        <Navbar title="Tela de cadastro" />
+            <FormInput
+              name="name"
+              label="Nome"
+              placeholder="Insira seu nome"
+              errors={errors}
+              value={formControls.name}
+              disabled={isLoading}
+              isFocused={isFocused}
+              onFocus={() => this.handleFocus('name')}
+              onBlur={() => this.handleFocus('name')}
+              onChangeText={(text) =>
+                this.handleInput({ name: 'name', value: text })
+              }
+            />
 
-        <View style={styles.content}>
-          <Text style={styles.title}>Para se cadastrar, por favor preencha as informações abaixo:</Text>
+            <FormInput
+              name="email"
+              label="E-mail"
+              placeholder="Insira seu e-mail"
+              errors={errors}
+              value={formControls.email}
+              disabled={isLoading}
+              isFocused={isFocused}
+              onFocus={() => this.handleFocus('email')}
+              onBlur={() => this.handleFocus('email')}
+              onChangeText={(text) =>
+                this.handleInput({ name: 'email', value: text })
+              }
+            />
 
-          <FormInput
-            name="name"
-            label="Nome"
-            placeholder="Insira seu nome"
-            errors={errors}
-            value={formControls.name}
-            disabled={isLoading}
-            isFocused={isFocused}
-            onFocus={() => this.handleFocus('name')}
-            onBlur={() => this.handleFocus('name')}
-            onChangeText={text => this.handleInput({ name: 'name', value: text })}
+            <FormInput
+              name="document"
+              label="CPF"
+              placeholder="Insira seu cpf"
+              errors={errors}
+              value={formControls.document}
+              disabled={isLoading}
+              isFocused={isFocused}
+              onFocus={() => this.handleFocus('document')}
+              onBlur={() => this.handleFocus('document')}
+              onChangeText={(text) =>
+                this.handleInput({ name: 'document', value: text })
+              }
+            />
+
+            <FormInput
+              name="password"
+              label="Senha"
+              placeholder="Insira sua nova senha"
+              secureTextEntry
+              errors={errors}
+              value={formControls.password}
+              disabled={isLoading}
+              isFocused={isFocused}
+              onFocus={() => this.handleFocus('password')}
+              onBlur={() => this.handleFocus('password')}
+              onChangeText={(text) =>
+                this.handleInput({ name: 'password', value: text })
+              }
+            />
+          </View>
+
+          <View style={styles.contentActions}>
+            <CustomButton
+              isLoading={isLoading}
+              text="Cadastrar"
+              onPress={this.handleRegistry}
+            />
+
+            <CustomTextLink
+              isLoading={isLoading}
+              text="Já possui uma conta? "
+              color="secondary"
+              textLink="Entre aqui."
+              onPress={() => navigate('Login')}
+            />
+          </View>
+        </KeyboardAvoidingView>
+
+        {showAnimation ? (
+          <CustomLottieView
+            source={require('@assets/animations/done.json')}
+            type="full"
           />
-
-          <FormInput
-            name="email"
-            label="E-mail"
-            placeholder="Insira seu e-mail"
-            errors={errors}
-            value={formControls.email}
-            disabled={isLoading}
-            isFocused={isFocused}
-            onFocus={() => this.handleFocus('email')}
-            onBlur={() => this.handleFocus('email')}
-            onChangeText={text => this.handleInput({ name: 'email', value: text })}
-          />
-
-          <FormInput
-            name="user"
-            label="Usuário"
-            placeholder="Insira um nome para seu usuário"
-            errors={errors}
-            value={formControls.user}
-            disabled={isLoading}
-            isFocused={isFocused}
-            onFocus={() => this.handleFocus('user')}
-            onBlur={() => this.handleFocus('user')}
-            onChangeText={text => this.handleInput({ name: 'user', value: text })}
-          />
-
-          <FormInput
-            name="password"
-            label="Senha"
-            placeholder="Insira sua nova senha"
-            secureTextEntry
-            errors={errors}
-            value={formControls.password}
-            disabled={isLoading}
-            isFocused={isFocused}
-            onFocus={() => this.handleFocus('password')}
-            onBlur={() => this.handleFocus('password')}
-            onChangeText={text => this.handleInput({ name: 'password', value: text })}
-          />
-
-          <CustomButton isLoading={isLoading} text="Cadastrar" onPress={this.handleRegistry} />
-
-          <CustomTextLink isLoading={isLoading} text="Já possui uma conta? " color="secondary" textLink="Entre aqui." onPress={() => navigate('Login')} />
-
-        </View>
-
-        {
-          showAnimation
-            ? <CustomLottieView source={require('@assets/animations/done.json')} type="full" />
-            : null
-        }
-
-      </View>
+        ) : null}
+      </SafeAreaView>
     );
   }
 }

@@ -1,19 +1,15 @@
 import { createSwitchNavigator } from 'react-navigation';
-
-import { LoginPage, SignupPage } from '@pages';
 import BottomTabNavigator from './tabNavigation';
+import { LoginStackNavigator } from './stackNavigation';
 
-const AppSwitchNavigator = createSwitchNavigator({
-  Login: {
-    screen: LoginPage
+const AppSwitchNavigator = createSwitchNavigator(
+  {
+    Login: LoginStackNavigator,
+    Tabs: BottomTabNavigator,
   },
-  Signup: {
-    screen: SignupPage
-  },
-  Tabs: BottomTabNavigator
-
-}, {
-  initialRouteName: 'Login'
-});
+  {
+    initialRouteName: 'Login',
+  }
+);
 
 export default AppSwitchNavigator;

@@ -1,52 +1,46 @@
 import { StyleSheet } from 'react-native';
-import { colors } from '../../constants';
-
-const borderRadiusDefault = 6;
-
-const styleInput = {
-    borderWidth: 1,
-    borderRadius: borderRadiusDefault,
-    width: '100%',
-    height: 42,
-    color: colors.darkColor,
-    fontSize: 16,
-    padding: 12
-}
+import { colors, defaultStyles } from '@constants';
 
 export const styles = StyleSheet.create({
-    formElement: {
-        width: '100%',
-        maxWidth: 280,
-        marginVertical: 10,
-    },
-    label: {
-        fontSize: 14,
-        color: colors.secondary,
-        marginVertical: 2
-    },
-    input: {
-        ...styleInput,
-        borderColor: colors.secondary,
-    },
-    inputLogin: {
-        ...styleInput,
-        borderColor: colors.lightColor,
-        backgroundColor: `rgba(${colors.lightColorRGB}, 0.3)`,
-    },
-    inputFocused: {
-        ...styleInput,
-        backgroundColor: `rgba(${colors.lightColorRGB}, 0.3)`,
-        borderColor: colors.primary,
-        borderWidth: 2
-    },
-    inputInvalid: {
-        ...styleInput,
-        backgroundColor: `rgba(${colors.lightColorRGB}, 0.3)`,
-        borderColor: colors.danger,
-    },
-    errorText: {
-        fontSize: 12,
-        padding: 4,
-        color: colors.danger,
-    }
+  formElement: {
+    ...defaultStyles.formElement,
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
+  label: {
+    ...defaultStyles.text,
+    width: '100%',
+    maxWidth: 280,
+    color: colors.secondary,
+    marginVertical: 2,
+  },
+  input: {
+    ...defaultStyles.input,
+    borderColor: colors.secondary,
+  },
+  inputLogin: {
+    ...defaultStyles.input,
+    borderColor: colors.lightColor,
+    backgroundColor: `rgba(${colors.lightColorRGB}, 0.3)`,
+  },
+  inputFocused: {
+    ...defaultStyles.input,
+    backgroundColor: `rgba(${colors.lightColorRGB}, 0.3)`,
+    borderColor: colors.primary,
+    borderWidth: 2,
+  },
+  inputInvalid: {
+    ...defaultStyles.input,
+    backgroundColor: `rgba(${colors.lightColorRGB}, 0.3)`,
+    borderColor: colors.danger,
+  },
+  errorText: {
+    ...defaultStyles.text,
+    width: '100%',
+    maxWidth: 280,
+    fontSize: 12,
+    padding: 4,
+    color: colors.danger,
+    marginBottom: -20,
+  },
 });

@@ -1,19 +1,27 @@
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 
-import { HomePage, InfoPage, SchedulePage } from '@pages';
+import { HomePage, InfoSelectPage, SchedulePage } from '@pages';
+import { InfoStackNavigator } from './stackNavigation';
 
-const BottomTabNavigator = createBottomTabNavigator({
+const BottomTabNavigator = createBottomTabNavigator(
+  {
     Home: {
-        screen: HomePage
+      screen: HomePage,
     },
     Info: {
-        screen: InfoPage
+      screen: InfoStackNavigator,
     },
     Schedule: {
-        screen: SchedulePage
-    }
-}, {
-    initialRouteName: 'Home'
-});
+      screen: SchedulePage,
+    },
+  },
+  {
+    initialRouteName: 'Info',
+    tabBarOptions: {
+      activeTintColor: '#FF6F00',
+      inactiveTintColor: '#263238',
+    },
+  }
+);
 
 export default BottomTabNavigator;

@@ -19,13 +19,13 @@ export default class HomePage extends Component {
         <View style={styles.content}>
 
           <View style={styles.personInfoContent}>
-            <Image style={styles.momBabyImage} source={require('@assets/images/mom_baby.png')} />
+            <Image style={styles.momBabyImage} source={require('@assets/icons/mom_baby.png')} />
             <Text style={styles.textName}>{userName}</Text>
             <Text style={styles.textEmail}>{userEmail}</Text>
           </View>
 
           <View style={styles.donationContent}>
-            <Image style={styles.milkBottleImage} source={require('@assets/images/milk_bottle.png')} />
+            <Image style={styles.milkBottleImage} source={require('@assets/icons/milk_bottle.png')} />
             <Text style={styles.textDonated}>{donatedAmount}</Text>
           </View>
 

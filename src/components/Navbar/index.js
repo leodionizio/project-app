@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Text, View, Image } from 'react-native';
 
-import { colors } from '../../constants';
 import { styles } from './styles';
 
 export default class Navbar extends Component {

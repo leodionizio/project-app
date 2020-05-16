@@ -11,7 +11,7 @@ module.exports = function (api) {
           "@components": "./src/components",
           "@utils": "./src/utils",
           "@assets": "./src/assets",
-          // "@config": "./app/config",
+          "@constants": "./src/constants",
           // "@helpers": "./app/helpers",
           // "@reducers": "./app/reducers",
         }

@@ -1,17 +1,28 @@
 import React, { Component } from 'react';
-import { Text, View, ImageBackground } from 'react-native';
+import {
+  Text,
+  Keyboard,
+  ImageBackground,
+  KeyboardAvoidingView,
+} from 'react-native';
+import { SafeAreaView } from 'react-navigation';
 
-import { CustomButton, CustomLink, CustomTextLink, FormInput } from '@components';
+import {
+  CustomButton,
+  CustomLink,
+  CustomTextLink,
+  FormInput,
+  Logo,
+} from '@components';
+
 import validators from '@utils/validate';
-
 import { styles } from './styles';
-import { messages } from '../../constants';
 
-const bgImage = require('@assets/images/bg-image.jpg')
+const bgImage = require('@assets/images/bg-image.jpg');
 
 export default class LoginPage extends Component {
   constructor(props) {
-    super(props)
+    super(props);
 
     this.handleFocus = this.handleFocus.bind(this);
     this.handleInput = this.handleInput.bind(this);
@@ -20,16 +31,16 @@ export default class LoginPage extends Component {
     this.state = {
       formControls: {
         email: '',
-        password: ''
+        password: '',
       },
       errors: {
-        invalidCredentials: false
+        invalidCredentials: false,
       },
       isFocused: {
         email: false,
-        password: false
+        password: false,
       },
-      isLoading: false
+      isLoading: false,
     };
   }
 
@@ -42,7 +53,7 @@ export default class LoginPage extends Component {
     isFocused[name] = !isFocused[name];
 
     this.setState({ isFocused });
-  };
+  }
 
   handleInput(input) {
     const { name, value } = input;
@@ -54,12 +65,12 @@ export default class LoginPage extends Component {
 
     this.setState({
       formControls,
-      errors
+      errors,
     });
-  };
+  }
 
   handleError(status) {
-    const { errors } = this.state
+    const { errors } = this.state;
 
     switch (status) {
       case 401:
@@ -72,87 +83,98 @@ export default class LoginPage extends Component {
         console.log('Adicionar toast', errors);
         break;
     }
-  };
+  }
 
-  hasErrors = errors => Object.values(errors).some(error => error);
+  hasErrors = (errors) => Object.values(errors).some((error) => error);
 
-  async handleLogin(e) {
-    console.log(e);
-    // e.preventDefault();
-
+  // async
+  handleLogin() {
+    Keyboard.dismiss();
     const { formControls, errors } = this.state;
+    const formErrors = validators.formValidate(formControls, errors);
+
+    if (this.hasErrors(formErrors)) {
+      this.hideLoader();
+      this.setState({ errors: formErrors });
+      return;
+    }
 
     this.showLoader();
 
-    const formErrors = validators.formValidate(
-      formControls,
-      errors
-    );
-
-    if (!this.hasErrors(formErrors)) {
-      try {
-        console.log('Form: ', formControls);
-        console.log('State: ', this.state);
-
-        // await api.post('/auth/login', formControls);
-        this.props.navigation.navigate('Tabs');
-
-      } catch (error) {
-        console.log('error', error);
-        this.handleError(error);
-      }
-      setTimeout(() => {
-        this.hideLoader();
-      }, 1200);
-      return
+    try {
+      console.log('Form: ', formControls);
+      this.hideLoader();
+      this.props.navigation.navigate('Tabs');
+      // await api.post('/auth/login', formControls);
+    } catch (error) {
+      console.log('error', error);
+      this.hideLoader();
+      this.handleError(error);
     }
-    this.hideLoader();
-    this.setState({ errors: formErrors });
-  };
+  }
 
   render() {
     const { formControls, errors, isFocused, isLoading } = this.state;
     const { navigate } = this.props.navigation;
 
     return (
-      <ImageBackground source={bgImage} style={styles.bgImage}>
-        <View style={styles.container}>
+      <SafeAreaView style={styles.container}>
+        <ImageBackground
+          source={bgImage}
+          resizeMode="cover"
+          style={styles.bgImage}
+        >
+          <KeyboardAvoidingView behavior="padding" style={styles.bgBackdrop}>
+            <Logo />
 
-          <Text style={styles.title}>Bem vindo à página de Login</Text>
+            <Text style={styles.title}> Taquaritinga</Text>
 
-          <FormInput
-            name="email"
-            placeholder="Insira seu e-mail"
-            errors={errors}
-            value={formControls.email}
-            disabled={isLoading}
-            isFocused={isFocused}
-            onFocus={() => this.handleFocus('email')}
-            onBlur={() => this.handleFocus('email')}
-            onChangeText={text => this.handleInput({ name: 'email', value: text })}
-          />
+            <FormInput
+              name="email"
+              placeholder="Insira seu e-mail"
+              errors={errors}
+              value={formControls.email}
+              disabled={isLoading}
+              isFocused={isFocused}
+              onFocus={() => this.handleFocus('email')}
+              onBlur={() => this.handleFocus('email')}
+              onChangeText={(text) =>
+                this.handleInput({ name: 'email', value: text })
+              }
+            />
 
-          <FormInput
-            name="password"
-            placeholder="*******"
-            secureTextEntry
-            errors={errors}
-            value={formControls.password}
-            disabled={isLoading}
-            isFocused={isFocused}
-            onFocus={() => this.handleFocus('password')}
-            onBlur={() => this.handleFocus('password')}
-            onChangeText={text => this.handleInput({ name: 'password', value: text })}
-          />
+            <FormInput
+              name="password"
+              placeholder="*******"
+              secureTextEntry
+              errors={errors}
+              value={formControls.password}
+              disabled={isLoading}
+              isFocused={isFocused}
+              onFocus={() => this.handleFocus('password')}
+              onBlur={() => this.handleFocus('password')}
+              onChangeText={(text) =>
+                this.handleInput({ name: 'password', value: text })
+              }
+            />
 
-          <CustomButton isLoading={isLoading} text="Entrar" onPress={() => this.handleLogin()} />
+            <CustomButton
+              isLoading={isLoading}
+              text="Entrar"
+              onPress={() => this.handleLogin()}
+            />
 
-          {/* <CustomLink isLoading={isLoading} text="Esqueceu a senha?" onPress={() => navigate('Tabs')} /> */}
+            {/* <CustomLink isLoading={isLoading} text="Esqueceu a senha?" onPress={() => navigate('Tabs')} /> */}
 
-          <CustomTextLink isLoading={isLoading} text="É nova por aqui? " textLink="Crie uma conta." onPress={() => navigate('Signup')} />
-
-        </View>
-      </ImageBackground>
+            <CustomTextLink
+              isLoading={isLoading}
+              text="É nova por aqui? "
+              textLink="Crie uma conta."
+              onPress={() => navigate('Signup')}
+            />
+          </KeyboardAvoidingView>
+        </ImageBackground>
+      </SafeAreaView>
     );
   }
 }

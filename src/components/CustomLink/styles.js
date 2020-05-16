@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { colors } from '../../constants';
+import { colors, defaultStyles } from '@constants';
 
 const linkText = {
     fontSize: 14,
@@ -9,9 +9,7 @@ const linkText = {
 
 export const styles = StyleSheet.create({
     formElement: {
-        width: '100%',
-        maxWidth: 280,
-        marginBottom: 10,
+        ...defaultStyles.formElement
     },
     primary: {
         ...linkText,

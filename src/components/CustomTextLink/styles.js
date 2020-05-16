@@ -1,30 +1,20 @@
 import { StyleSheet } from 'react-native';
-import { colors } from '../../constants';
-
-const linkText = {
-    fontSize: 14,
-    // paddingVertical: 4,
-};
+import { colors, defaultStyles } from '@constants';
 
 export const styles = StyleSheet.create({
     formElement: {
-        width: '100%',
-        maxWidth: 280,
-        marginBottom: 10,
-        display: 'flex',
-        flexDirection: 'row',
-        justifyContent: 'center'
+        ...defaultStyles.formElement
     },
     text: {
-        ...linkText,
+        ...defaultStyles.text,
         color: colors.darkColor
     },
     textsecondary: {
-        ...linkText,
+        ...defaultStyles.text,
         color: colors.secondary
     },
     primary: {
-        ...linkText,
+        ...defaultStyles.text,
         color: colors.primary
     },
 });

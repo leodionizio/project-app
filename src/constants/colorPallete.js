@@ -5,7 +5,7 @@ const colors = {
     defaultColor: '#808080',
     darkColor: '#4b4b4b',
     lightColor: '#f9f9f9',
-    danger: '#ff4d4d',
+    danger: '#b30000',
     placeholderColor: '#bfbfbf',
     placeholderColorLogin: '#f0f0f0',
     backgroundRGB: '241,176,149',
