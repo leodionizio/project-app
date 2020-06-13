@@ -1,9 +1,9 @@
 {
-  "name": "projectApp2",
-  "displayName": "projectApp2",
+  "name": "Gota de Amor",
+  "displayName": "Gota de Amor",
   "expo": {
-    "name": "projectApp2",
-    "slug": "projectApp2",
+    "name": "gota_de_amor_taquaritinga",
+    "slug": "gota_de_amor_taquaritinga",
     "privacy": "unlisted",
     "sdkVersion": "36.0.0",
     "version": "1.0.0",

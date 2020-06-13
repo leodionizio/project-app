@@ -2,12 +2,16 @@ import { createStackNavigator } from 'react-navigation-stack';
 import {
   LoginPage,
   SignupPage,
-  InfoPage,
+  HomePage,
+  InfoDetailPage,
   InfoSelectPage,
   InfoListPage,
+  MythsTruthsDetailPage,
+  ScheduleSelectPage,
 } from '@pages';
 
 import { colors } from '../src/constants';
+import ScheduleInfoPage from '../src/pages/ScheduleInfoPage';
 
 const navigationDefaultOptions = {
   headerTitleStyle: {
@@ -42,6 +46,21 @@ const LoginStackNavigator = createStackNavigator(
   }
 );
 
+const HomeStackNavigator = createStackNavigator(
+  {
+    Home: {
+      screen: HomePage,
+      navigationOptions: {
+        headerTitle: 'Início',
+        ...navigationDefaultOptions,
+      },
+    },
+  },
+  {
+    initialRouteName: 'Home',
+  }
+);
+
 const InfoStackNavigator = createStackNavigator(
   {
     InfoSelect: {
@@ -58,10 +77,17 @@ const InfoStackNavigator = createStackNavigator(
         ...navigationDefaultOptions,
       },
     },
-    Info: {
-      screen: InfoPage,
+    InfoDetail: {
+      screen: InfoDetailPage,
       navigationOptions: {
-        headerTitle: 'Dúvidas e Informações',
+        headerTitle: 'Informação',
+        ...navigationDefaultOptions,
+      },
+    },
+    MythsTruthsDetail: {
+      screen: MythsTruthsDetailPage,
+      navigationOptions: {
+        headerTitle: 'Mitos e Verdades',
         ...navigationDefaultOptions,
       },
     },
@@ -71,4 +97,40 @@ const InfoStackNavigator = createStackNavigator(
   }
 );
 
-export { LoginStackNavigator, InfoStackNavigator };
+const ScheduleStackNavigator = createStackNavigator(
+  {
+    ScheduleSelect: {
+      screen: ScheduleSelectPage,
+      navigationOptions: {
+        headerTitle: 'Agendamento',
+        ...navigationDefaultOptions,
+      },
+    },
+    ScheduleInfo: {
+      screen: ScheduleInfoPage,
+      navigationOptions: {
+        headerTitle: 'Santa Casa de Taquaritinga',
+        ...navigationDefaultOptions,
+      },
+    },
+    // InfoDetail: {
+    //   screen: InfoDetailPage,
+    //   navigationOptions: {
+    //     headerTitle: 'Informação',
+    //     ...navigationDefaultOptions,
+    //   },
+    // },
+    // MythsTruthsDetail: {
+    //   screen: MythsTruthsDetailPage,
+    //   navigationOptions: {
+    //     headerTitle: 'Mitos e Verdades',
+    //     ...navigationDefaultOptions,
+    //   },
+    // },
+  },
+  {
+    initialRouteName: 'ScheduleSelect',
+  }
+);
+
+export { LoginStackNavigator, HomeStackNavigator, InfoStackNavigator, ScheduleStackNavigator };

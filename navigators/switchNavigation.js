@@ -9,6 +9,7 @@ const AppSwitchNavigator = createSwitchNavigator(
   },
   {
     initialRouteName: 'Login',
+    // initialRouteName: 'Tabs',
   }
 );
 

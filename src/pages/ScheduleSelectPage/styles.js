@@ -17,29 +17,38 @@ export const styles = StyleSheet.create({
     flexDirection: 'column',
     backgroundColor: colors.backgroundColor,
   },
-  cardContainerInfo: {
+  cardAlreadyDonor: {
     ...cardContainer,
     flexDirection: 'row',
     marginTop: 12,
     marginBottom: 6,
-    backgroundColor: '#F7D8CA',
+    backgroundColor: '#AFDCD6',
   },
-  cardContainerMythsTruths: {
+  cardFisrtTime: {
     ...cardContainer,
     flexDirection: 'row-reverse',
     marginTop: 6,
     marginBottom: 12,
-    backgroundColor: '#AFDCD6',
+    backgroundColor: '#F7D8CA',
   },
   title: {
     ...defaultStyles.text,
+    textAlign: 'justify',
+    width: '100%',
+    fontSize: 16,
+    color: colors.secondary,
+    paddingHorizontal: 24,
+    paddingVertical: 12,
+},
+  cardTitle: {
+    ...defaultStyles.text,
     flex: 1,
-    fontSize: 32,
+    fontSize: 34,
     color: colors.lightColor,
     marginLeft: 12,
   },
   image: {
-    width: 120,
-    height: 120,
+    width: 80,
+    height: 80,
   },
 });

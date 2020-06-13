@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, Button } from 'react-native';
-
-import { FormInput, CustomButton, CustomTextLink, Navbar } from '@components';
-
+import { Text, View, TouchableWithoutFeedback, Image } from 'react-native';
 import { styles } from './styles';
 
 export default class InfoSelectPage extends Component {
@@ -15,9 +12,25 @@ export default class InfoSelectPage extends Component {
 
     return (
       <View style={styles.container}>
-        <Text style={styles.text}>Bem-vindo! Informações</Text>
+        <TouchableWithoutFeedback onPress={() => navigate('InfoList')}>
+          <View style={styles.cardContainerInfo}>
+            <Image
+              style={styles.image}
+              source={require('@assets/icons/nurse.png')}
+            />
+            <Text style={styles.title}>Informações</Text>
+          </View>
+        </TouchableWithoutFeedback>
 
-        <Button onPress={() => navigate('InfoList')} title="Navegar"/>
+        <TouchableWithoutFeedback onPress={() => navigate('MythsTruthsDetail')}>
+          <View style={styles.cardContainerMythsTruths}>
+            <Image
+              style={styles.image}
+              source={require('@assets/icons/mom.png')}
+            />
+            <Text style={styles.title}>Mitos e Verdades</Text>
+          </View>
+        </TouchableWithoutFeedback>
       </View>
     );
   }

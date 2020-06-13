@@ -14,8 +14,6 @@ export default class HomePage extends Component {
 
     return (
       <View style={styles.container}>
-        <Navbar title="Início" />
-
         <View style={styles.content}>
 
           <View style={styles.personInfoContent}>

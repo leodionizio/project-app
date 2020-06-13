@@ -19,8 +19,8 @@ export default class App extends Component {
   _loadFonts = async () => {
     try {
       await Font.loadAsync({
-        Ruluko: require('@assets/fonts/Ruluko-Regular.ttf'),
-        AlexBrush: require('@assets/fonts/AlexBrush-Regular.ttf'),
+        'Ruluko': require('@assets/fonts/Ruluko-Regular.ttf'),
+        'AlexBrush': require('@assets/fonts/AlexBrush-Regular.ttf'),
       }).then(() => {
         this.setState({ isReady: true });
       });

@@ -1,17 +1,21 @@
 import HomePage from '@pages/HomePage';
-import InfoPage from '@pages/InfoPage';
+import InfoDetailPage from '@pages/InfoDetailPage';
 import InfoListPage from '@pages/InfoListPage';
 import InfoSelectPage from '@pages/InfoSelectPage';
 import LoginPage from '@pages/LoginPage/index';
-import SchedulePage from '@pages/SchedulePage';
+import ScheduleSelectPage from '@pages/ScheduleSelectPage';
+import ScheduleInfoPage from '@pages/ScheduleInfoPage';
 import SignupPage from '@pages/SignupPage/index';
+import MythsTruthsDetailPage from '@pages/MythsTruthsDetailPage/index';
 
 export {
-    HomePage,
-    InfoPage,
-    InfoListPage,
-    InfoSelectPage,
-    LoginPage,
-    SchedulePage,
-    SignupPage
+  HomePage,
+  InfoDetailPage,
+  InfoListPage,
+  InfoSelectPage,
+  LoginPage,
+  MythsTruthsDetailPage,
+  ScheduleSelectPage,
+  ScheduleInfoPage,
+  SignupPage,
 };

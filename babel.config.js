@@ -12,6 +12,7 @@ module.exports = function (api) {
           "@utils": "./src/utils",
           "@assets": "./src/assets",
           "@constants": "./src/constants",
+          "@mock": "./src/mock",
           // "@helpers": "./app/helpers",
           // "@reducers": "./app/reducers",
         }
