@@ -69,18 +69,17 @@ export default class LoginPage extends Component {
     });
   }
 
-  handleError(status) {
+  handleError(error) {
     const { errors } = this.state;
 
-    switch (status) {
+    switch (error.status) {
       case 401:
         errors.invalidCredentials = true;
         this.setState({ errors });
         break;
 
       default:
-        // this.toast.error(messages.error['generic'], toastOptions);
-        console.log('Adicionar toast', errors);
+        console.log('Erro:', error);
         break;
     }
   }
@@ -88,7 +87,7 @@ export default class LoginPage extends Component {
   hasErrors = (errors) => Object.values(errors).some((error) => error);
 
   // async
-  handleLogin() {
+  async handleLogin() {
     Keyboard.dismiss();
     const { formControls, errors } = this.state;
     const formErrors = validators.formValidate(formControls, errors);
@@ -102,12 +101,15 @@ export default class LoginPage extends Component {
     this.showLoader();
 
     try {
-      console.log('Form: ', formControls);
+      const response = await fetch('/api/user', {
+        method: 'POST',
+        body: { ...formControls },
+      }).then((res) => res.json());
+      if (!response.ok) throw response;
+
       this.hideLoader();
-      this.props.navigation.navigate('Tabs');
-      // await api.post('/auth/login', formControls);
+      this.props.navigation.navigate('Home', { userID: response.body.id });
     } catch (error) {
-      console.log('error', error);
       this.hideLoader();
       this.handleError(error);
     }
@@ -157,6 +159,12 @@ export default class LoginPage extends Component {
                 this.handleInput({ name: 'password', value: text })
               }
             />
+
+            {errors.invalidCredentials ? (
+              <Text style={styles.invalidCredentials}>
+                Usuário e/ou senha inválidos.
+              </Text>
+            ) : null}
 
             <CustomButton
               isLoading={isLoading}

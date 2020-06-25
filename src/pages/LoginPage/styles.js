@@ -32,4 +32,10 @@ export const styles = StyleSheet.create({
     padding: 4,
     color: colors.danger,
   },
+  invalidCredentials: {
+    ...defaultStyles.text,
+    fontSize: 16,
+    marginBottom: 18,
+    color: colors.danger,
+  }
 });

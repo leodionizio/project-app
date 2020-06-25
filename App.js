@@ -3,37 +3,40 @@ import { ActivityIndicator } from 'react-native';
 import { createAppContainer } from 'react-navigation';
 import * as Font from 'expo-font';
 import AppSwitchNavigator from '@navigators/switchNavigation';
+import { makeServer } from './server.mock';
+
+if (window.server) {
+  server.shutdown();
+}
+
+window.server = makeServer();
 
 const AppContainer = createAppContainer(AppSwitchNavigator);
 
 export default class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { isReady: false };
+  constructor() {
+    super();
+    this.state = { fontsLoaded: false };
   }
 
-  componentDidMount() {
-    this._loadFonts();
-  }
-
-  _loadFonts = async () => {
+  async componentDidMount() {
     try {
       await Font.loadAsync({
-        'Ruluko': require('@assets/fonts/Ruluko-Regular.ttf'),
-        'AlexBrush': require('@assets/fonts/AlexBrush-Regular.ttf'),
-      }).then(() => {
-        this.setState({ isReady: true });
+        ruluko: require('./src/assets/fonts/Ruluko-Regular.ttf'),
+        'alex-brush': require('./src/assets/fonts/AlexBrush-Regular.ttf'),
       });
+
+      this.setState({ fontsLoaded: true });
     } catch (error) {
       console.log('error on loading fonts');
     }
-  };
+  }
 
   render() {
-    if (!this.state.isReady) {
-      return <ActivityIndicator size="large" color="#5FB9AF" />;
-    } else {
+    if (this.state.fontsLoaded) {
       return <AppContainer />;
+    } else {
+      return <ActivityIndicator size="large" color="#5FB9AF" />;
     }
   }
 }

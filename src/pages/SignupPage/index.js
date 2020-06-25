@@ -55,7 +55,7 @@ export default class SignupPage extends Component {
     setTimeout(() => {
       this.setState({ showAnimation: false });
       this.props.navigation.navigate('Login');
-    }, 2000);
+    }, 3000);
   };
 
   handleFocus(name) {
@@ -112,12 +112,12 @@ export default class SignupPage extends Component {
     try {
       console.log('form: ', formControls);
       // await api.post('/auth/login', formControls);
-      setTimeout(() => {
-        this.hideLoader();
-        /* Ajustar para mobile */
-        // this.showAnimationView();
-        this.props.navigation.navigate('Login');
-      }, 3000);
+      this.showAnimationView();
+      this.hideLoader();
+      // setTimeout(() => {
+      //   /* Ajustar para mobile */
+      //   this.props.navigation.navigate('Login');
+      // }, 3000);
 
     } catch (error) {
       this.handleError(error);

@@ -18,7 +18,7 @@ export default class ScheduleSelectPage extends Component {
           já ter efetuado a primeira doação junto a equipe da Santa Casa de
           Taquaritinga.
         </Text>
-        <TouchableWithoutFeedback onPress={() => navigate('InfoList')}>
+        <TouchableWithoutFeedback onPress={() => navigate('ScheduleForm')}>
           <View style={styles.cardAlreadyDonor}>
             <Image
               style={styles.image}

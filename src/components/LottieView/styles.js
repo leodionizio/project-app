@@ -13,8 +13,7 @@ export const styles = StyleSheet.create({
     lottieImageFull: {
         width: maxWidth,
         height: maxHeight,
-        elevation: 2,
-        backgroundColor: `rgba(${colors.lightColorRGB}, 0.3)`,
+        backgroundColor: `rgba(${colors.lightColorRGB}, 0.6)`,
     }
 });
 

@@ -5,16 +5,17 @@ const defaultStyles = {
     width: '100%',
     flexDirection: 'row',
     justifyContent: 'center',
+    alignItems: 'center',
     marginBottom: 24,
   },
 
   text: {
-    fontFamily: 'Ruluko',
+    fontFamily: 'ruluko',
     fontSize: 14,
   },
 
   input: {
-    fontFamily: 'Ruluko',
+    fontFamily: 'ruluko',
     fontSize: 16,
     borderWidth: 1,
     width: '100%',

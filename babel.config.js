@@ -13,10 +13,10 @@ module.exports = function (api) {
           "@assets": "./src/assets",
           "@constants": "./src/constants",
           "@mock": "./src/mock",
-          // "@helpers": "./app/helpers",
+          "@services": "./src/services",
           // "@reducers": "./app/reducers",
         }
       }]
-    ]
+    ],
   };
 };

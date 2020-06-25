@@ -8,10 +8,11 @@ import {
   InfoListPage,
   MythsTruthsDetailPage,
   ScheduleSelectPage,
+  ScheduleInfoPage,
+  ScheduleFormPage,
 } from '@pages';
 
 import { colors } from '../src/constants';
-import ScheduleInfoPage from '../src/pages/ScheduleInfoPage';
 
 const navigationDefaultOptions = {
   headerTitleStyle: {
@@ -21,6 +22,7 @@ const navigationDefaultOptions = {
   headerStyle: {
     backgroundColor: colors.secondary,
     shadowColor: colors.defaultColor,
+    height: 100
   },
 };
 
@@ -113,6 +115,13 @@ const ScheduleStackNavigator = createStackNavigator(
         ...navigationDefaultOptions,
       },
     },
+    ScheduleForm: {
+      screen: ScheduleFormPage,
+      navigationOptions: {
+        headerTitle: 'Solicitar atendimento',
+        ...navigationDefaultOptions,
+      },
+    },
     // InfoDetail: {
     //   screen: InfoDetailPage,
     //   navigationOptions: {
@@ -133,4 +142,9 @@ const ScheduleStackNavigator = createStackNavigator(
   }
 );
 
-export { LoginStackNavigator, HomeStackNavigator, InfoStackNavigator, ScheduleStackNavigator };
+export {
+  LoginStackNavigator,
+  HomeStackNavigator,
+  InfoStackNavigator,
+  ScheduleStackNavigator,
+};
