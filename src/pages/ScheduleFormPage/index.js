@@ -1,11 +1,16 @@
 import React, { Component } from 'react';
-import { View } from 'react-native';
+import { View, Keyboard } from 'react-native';
 
-import { styles } from './styles';
 import SelectScheduleMaterials from './components/SelectScheduleMaterials';
 import SelectScheduleType from './components/SelectScheduleType';
-
+import SelectScheduleDonation from './components/SelectScheduleDonation';
+import SelectScheduleObservation from './components/SelectScheduleObservation';
 import Actions from './components/Actions';
+
+import { styles } from './styles';
+import { CustomLottieView } from '@components/index';
+
+import stepsForm from '@utils/enums/steps-form.enum';
 
 export default class ScheduleFormPage extends Component {
   constructor(props) {
@@ -14,11 +19,19 @@ export default class ScheduleFormPage extends Component {
     this.handleSelectType = this.handleSelectType.bind(this);
     this.handleChangeStep = this.handleChangeStep.bind(this);
     this.handleChangeAmount = this.handleChangeAmount.bind(this);
+    this.handleChangeDonation = this.handleChangeDonation.bind(this);
+    this.handleSetObservation = this.handleSetObservation.bind(this);
 
     this.state = {
+      showAnimation: false,
       formControls: {
-        step: 1,
+        step: stepsForm.TYPE,
         type: null,
+        observation: '',
+        collect: {
+          amountMilk: 1,
+          daysStartedToBeCollect: 1,
+        },
         materials: [
           {
             id: 1,
@@ -42,6 +55,15 @@ export default class ScheduleFormPage extends Component {
       },
     };
   }
+
+  showAnimationView = () => {
+    Keyboard.dismiss();
+    this.setState({ showAnimation: true });
+    setTimeout(() => {
+      this.setState({ showAnimation: false });
+      this.props.navigation.navigate('ScheduleSelect');
+    }, 3000);
+  };
 
   handleSelectType(selectedType) {
     this.setState({
@@ -71,42 +93,107 @@ export default class ScheduleFormPage extends Component {
     });
   }
 
-  handleChangeStep(newStep) {
+  handleChangeDonation({ newAmountMilk, newDaysStartedToBeCollect }) {
+    const {
+      amountMilk,
+      daysStartedToBeCollect,
+    } = this.state.formControls.collect;
+
     this.setState({
       ...this.state,
       formControls: {
         ...this.state.formControls,
-        step: newStep,
+        collect: {
+          amountMilk: newAmountMilk ? newAmountMilk : amountMilk,
+          daysStartedToBeCollect: newDaysStartedToBeCollect
+            ? newDaysStartedToBeCollect
+            : daysStartedToBeCollect,
+        },
       },
     });
   }
 
+  handleSetObservation(observation) {
+    this.setState({
+      ...this.state,
+      formControls: {
+        ...this.state.formControls,
+        observation,
+      },
+    });
+  }
+
+  handleChangeStep(newStep) {
+    if (newStep <= stepsForm.OBSERVATION) {
+      this.setState({
+        ...this.state,
+        formControls: {
+          ...this.state.formControls,
+          step: newStep,
+        },
+      });
+      return;
+    }
+
+    this.showAnimationView();
+  }
+
   render() {
-    const { type, step, materials, isChanging } = this.state.formControls;
+    const {
+      type,
+      step,
+      collect,
+      materials,
+      observation,
+    } = this.state.formControls;
+    const { showAnimation } = this.state;
 
     return (
       <View style={styles.container}>
         <View style={styles.formContent}>
-          {step === 1 ? (
+          {step === stepsForm.TYPE ? (
             <SelectScheduleType
               type={type}
               handleSelectType={this.handleSelectType}
             />
           ) : null}
 
-          {step > 1 ? (
+          {step === stepsForm.MATERIALS ? (
             <SelectScheduleMaterials
               materials={materials}
               formControls={this.state.formControls}
               handleChangeAmount={this.handleChangeAmount}
             />
           ) : null}
+
+          {step === stepsForm.COLLECT ? (
+            <SelectScheduleDonation
+              collect={collect}
+              formControls={this.state.formControls}
+              handleChangeDonation={this.handleChangeDonation}
+            />
+          ) : null}
+
+          {step === stepsForm.OBSERVATION ? (
+            <SelectScheduleObservation
+              observation={observation}
+              handleSetObservation={this.handleSetObservation}
+            />
+          ) : null}
         </View>
         <Actions
           step={step}
+          type={type}
           handleChangeStep={this.handleChangeStep}
           handleBack={this.handleBack}
         />
+
+        {showAnimation ? (
+          <CustomLottieView
+            source={require('@assets/animations/done.json')}
+            type="full"
+          />
+        ) : null}
       </View>
     );
   }

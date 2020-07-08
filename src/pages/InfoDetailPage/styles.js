@@ -13,12 +13,12 @@ export const styles = StyleSheet.create({
     ...defaultStyles.text,
     textAlign: 'justify',
     width: '100%',
-    fontSize: 16,
+    fontSize: 18,
     color: colors.secondary,
   },
   text: {
     ...defaultStyles.text,
-    textAlign: 'justify',
+    fontSize: 16,
     color: colors.defaultColor,
   },
 });

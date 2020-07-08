@@ -12,7 +12,6 @@ import {
   CustomButton,
   CustomTextLink,
   CustomLottieView,
-  Navbar,
 } from '@components/index';
 import validators from '@utils/validate';
 
@@ -110,15 +109,8 @@ export default class SignupPage extends Component {
     this.showLoader();
 
     try {
-      console.log('form: ', formControls);
-      // await api.post('/auth/login', formControls);
       this.showAnimationView();
       this.hideLoader();
-      // setTimeout(() => {
-      //   /* Ajustar para mobile */
-      //   this.props.navigation.navigate('Login');
-      // }, 3000);
-
     } catch (error) {
       this.handleError(error);
     }

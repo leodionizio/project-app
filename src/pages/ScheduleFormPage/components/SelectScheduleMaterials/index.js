@@ -6,7 +6,6 @@ import { styles } from './styles';
 export default class SelectScheduleMaterials extends Component {
   render() {
     const { materials, handleChangeAmount, formControls } = this.props;
-    console.log('formCOntrols', formControls);
 
     return (
       <View style={styles.container}>

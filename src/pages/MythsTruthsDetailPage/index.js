@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, FlatList, ScrollView, SafeAreaView } from 'react-native';
+import { Text, View, FlatList } from 'react-native';
 import { InfoReferences, MythTruthItem } from '@components';
 import { styles } from './styles';
 

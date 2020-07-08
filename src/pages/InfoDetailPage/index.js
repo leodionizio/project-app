@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View } from 'react-native';
+import { Text, View, ScrollView } from 'react-native';
 import { styles } from './styles';
 
 /* Mock for information details */
@@ -19,10 +19,12 @@ export default class InfoDetailPage extends Component {
     const { info } = this.state;
 
     return (
-      <View style={styles.container}>
-        <Text style={styles.title}>{info.title}</Text>
-        <Text style={styles.text}>{info.text}</Text>
-      </View>
+      <ScrollView>
+        <View style={styles.container}>
+          <Text style={styles.title} >{info.title}</Text>
+          <Text style={styles.text}>{info.text}</Text>
+        </View>
+      </ScrollView>
     );
   }
 }

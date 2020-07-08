@@ -22,7 +22,6 @@ const navigationDefaultOptions = {
   headerStyle: {
     backgroundColor: colors.secondary,
     shadowColor: colors.defaultColor,
-    height: 100
   },
 };
 
@@ -122,23 +121,10 @@ const ScheduleStackNavigator = createStackNavigator(
         ...navigationDefaultOptions,
       },
     },
-    // InfoDetail: {
-    //   screen: InfoDetailPage,
-    //   navigationOptions: {
-    //     headerTitle: 'Informação',
-    //     ...navigationDefaultOptions,
-    //   },
-    // },
-    // MythsTruthsDetail: {
-    //   screen: MythsTruthsDetailPage,
-    //   navigationOptions: {
-    //     headerTitle: 'Mitos e Verdades',
-    //     ...navigationDefaultOptions,
-    //   },
-    // },
   },
   {
     initialRouteName: 'ScheduleSelect',
+    // initialRouteName: 'ScheduleForm'
   }
 );
 

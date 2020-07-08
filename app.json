@@ -2,11 +2,16 @@
   "name": "projectApp2",
   "displayName": "Gota de Amor",
   "expo": {
-    "name": "gota_de_amor_taquaritinga",
-    "slug": "gota_de_amor_taquaritinga",
+    "name": "Gota de Amor",
+    "slug": "gota-de-amor-taquaritinga",
     "privacy": "unlisted",
     "sdkVersion": "36.0.0",
     "version": "1.0.0",
+    "primaryColor": "#F1B095",
+    "icon": "assets/app-icons/project-icon.png",
+    "splash": {
+      "backgroundColor": "#F1B095"
+    },
     "entryPoint": "node_modules/expo/AppEntry.js",
     "platforms": ["ios", "android", "web"],
     "android": {

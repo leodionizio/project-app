@@ -77,7 +77,7 @@ export default class HomePage extends Component {
           <View style={styles.donationContent}>
             <Image
               style={styles.milkBottleImage}
-              source={require('@assets/icons/milk_bottle.png')}
+              source={require('@assets/icons/frasco.png')}
             />
             <Text style={styles.textDonated}>{donatedAmountML}</Text>
           </View>
@@ -86,7 +86,7 @@ export default class HomePage extends Component {
             <TouchableWithoutFeedback onPress={() => this.showAnimationView()}>
               <Image
                 style={styles.shareImage}
-                source={require('@assets/icons/share_icon.png')}
+                source={require('@assets/icons/compartilhar.png')}
               />
             </TouchableWithoutFeedback>
           </View>

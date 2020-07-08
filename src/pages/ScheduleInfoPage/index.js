@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import { Text, View, Image } from 'react-native';
+import { Text, View, Image, ScrollView } from 'react-native';
 
 import { styles } from './styles';
-import { ScrollView } from 'react-native-gesture-handler';
 
 export default class ScheduleInfoPage extends Component {
   render() {
